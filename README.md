@@ -23,5 +23,5 @@ gunicorn -c config/gunicorn_config.py 'app:app'
 ## How to create dist/ with pyinstaller?
 
 ```shell
-pyinstaller app.py
+pyinstaller --clean --onefile --hidden-import=gunicorn --hidden-import=gunicorn.log app.py
 ```
