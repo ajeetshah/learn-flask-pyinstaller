@@ -49,6 +49,17 @@ class GunicornServer(BaseApplication):
     def load(self):
         return self.application
 
+def get_config_path():
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, "config", "gunicorn_config.py")
+
+
 if __name__ == "__main__":
-    config_file = "config/gunicorn_config.py"
+    # config_file = "config/gunicorn_config.py"
+    config_file = get_config_path()
+    if not os.path.exists(config_file):
+        raise FileNotFoundError(f"Gunicorn config not found at: {config_file}")
     GunicornServer(app, config_file).run()
