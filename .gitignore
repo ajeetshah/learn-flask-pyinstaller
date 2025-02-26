@@ -1,0 +1,5 @@
+.v-env
+build
+dist
+__pycache__
+**/__pycache__
